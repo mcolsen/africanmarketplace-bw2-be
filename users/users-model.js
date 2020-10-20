@@ -5,6 +5,7 @@ module.exports = {
     find,
     findBy,
     findById,
+    findByUsername,
 };
 
 function find() {
@@ -17,6 +18,12 @@ function findBy(filter) {
         .where(filter)
         .select("u.id", "u.username", "u.password", "r.name as role")
         .orderBy("u.id");
+}
+
+function findByUsername(username) {
+    return db("users")
+        .where({username})
+    
 }
 
 async function add(user) {

@@ -22,7 +22,6 @@ exports.up = function (knex) {
       })
       .createTable("profile", tbl => {
         tbl.increments();
-        tbl.string("name", 64).notNullable();
         tbl.string("email", 128).notNullable();
         tbl.string("business", 128)
         tbl.integer("user_id")

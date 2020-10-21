@@ -30,7 +30,7 @@ router.put("/:id/", restricted, checkRole("user"), (req, res) => {
 })
 
 router.get("/:id/listings", restricted, checkRole("user"), (req, res) => {
-    Listings.findById(req.params.id)
+    Listings.findAllByProfileId(req.params.id)
         .then(listings => {
             res.status(200).json({ listings, jwt: req.jwt });
         })

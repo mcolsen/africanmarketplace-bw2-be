@@ -6,6 +6,7 @@ module.exports = {
     find,
     findBy,
     findById,
+    findAllByProfileId,
     remove,
 };
 
@@ -64,4 +65,8 @@ function findBy(filter) {
 
 function findById(id) {
     return db("listings").where({ id }).first();
+}
+
+function findAllByProfileId(id) {
+    return db("listings").where({profile_id: id});
 }

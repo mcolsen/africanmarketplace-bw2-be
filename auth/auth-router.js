@@ -17,11 +17,18 @@ router.post("/register", (req, res) => {
         const hash = bcryptjs.hashSync(credentials.password, rounds);
 
         credentials.password = hash;
-
+        let {username, password, ...rest} = credentials
         // save the user to the database
-        Users.add(credentials)
+        Users.add({username, password})
             .then(user => {
-                res.status(201).json({ data: user });
+                // res.status(201).json({ data: user });
+                Users.addProfile(user.id, rest)
+                    .then(profile => {
+                        res.status(201).json({data: {user, profile}})
+                    })
+                    .catch(error => {
+                        res.status(500).json({message: error.message});
+                    })
             })
             .catch(error => {
                 res.status(500).json({ message: error.message });

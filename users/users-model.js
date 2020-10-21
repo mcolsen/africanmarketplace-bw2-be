@@ -6,6 +6,8 @@ module.exports = {
     findBy,
     findById,
     findByUsername,
+    addProfile,
+    findProfileById
 };
 
 function find() {
@@ -26,9 +28,19 @@ function findByUsername(username) {
     
 }
 
-async function add(user) {
+async function addProfile(user_id, profile){
     try {
-        const [id] = await db("users").insert(user, "id");
+        const [id] = await db("profile").insert({...profile, user_id});
+
+        return findProfileById(id);
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function add(user, role="user") {
+    try {
+        const [id] = await db("users").insert({...user, role}, "id");
 
         return findById(id);
     } catch (error) {
@@ -38,4 +50,8 @@ async function add(user) {
 
 function findById(id) {
     return db("users").where({ id }).first();
+}
+
+function findProfileById(id) {
+    return db("profile").where({ id }).first();
 }

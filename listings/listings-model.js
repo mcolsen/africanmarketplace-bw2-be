@@ -6,7 +6,6 @@ module.exports = {
     find,
     findBy,
     findById,
-    findByUsername,
     remove,
 };
 
@@ -31,9 +30,9 @@ async function add(listing, profile_id) {
     }
 }
 
-async function change(listing, profile_id) {
+async function change(listing, listing_id) {
     try {
-        const [id] = await db("listings").modify({...listing, profile_id}, "id");
+        const [id] = await db("listings").modify({...listing, listing_id}, "id");
         return findById(id);
     } catch (error) {
         throw error;

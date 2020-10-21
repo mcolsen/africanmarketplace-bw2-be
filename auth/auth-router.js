@@ -24,7 +24,8 @@ router.post("/register", (req, res) => {
                 // res.status(201).json({ data: user });
                 Users.addProfile(user.id, rest)
                     .then(profile => {
-                        res.status(201).json({data: {user, profile}})
+                        const token = getJwt(user);
+                        res.status(201).json({data: {user, profile}, token})
                     })
                     .catch(error => {
                         res.status(500).json({message: error.message});

@@ -13,8 +13,7 @@ function find() {
     return db("profile").select(
         "id",
          "user_id",
-         "first_name",
-         "last_name",
+         "email",
          "business"
          )
          .orderBy("id");

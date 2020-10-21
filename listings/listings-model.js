@@ -13,6 +13,7 @@ module.exports = {
 function find() {
     return db("listings").select(
         "id",
+        "profile_id",
          "item",
          "description",
          "price",

@@ -7,7 +7,8 @@ module.exports = {
     findById,
     findByUsername,
     addProfile,
-    findProfileById
+    findProfileById,
+    findByEmail,
 };
 
 function find() {
@@ -26,6 +27,11 @@ function findByUsername(username) {
     return db("users")
         .where({username})
     
+}
+
+function findByEmail(email) {
+    return db("users")
+        .where({email})
 }
 
 async function addProfile(user_id, profile){

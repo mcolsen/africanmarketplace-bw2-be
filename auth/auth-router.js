@@ -43,10 +43,10 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     if (isValid(req.body)) {
-        Users.findByUsername(username)
+        Users.findByEmail(email)
             .then(([user]) => {
                 // compare the password the hash stored in the database
                 console.log(user);

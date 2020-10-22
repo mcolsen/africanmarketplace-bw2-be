@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken"); // npm i this package
 const router = require("express").Router();
 const config = require("../api/config.js");
 
+const Profile = require("../profiles/profile-model");
 const Users = require("../users/users-model.js");
 const { isValid } = require("../users/users-service.js");
 
@@ -50,9 +51,12 @@ router.post("/login", (req, res) => {
                 // compare the password the hash stored in the database
                 console.log(user);
                 if (bcryptjs.compareSync(password, user.password)) {
-                    const token = getJwt(user);
-
-                    res.status(200).json({ message: "Welcome to our API", token });
+                    
+                    Profile.findByUserId(user.id)
+                        .then(profile => {
+                            const token = getJwt(user);
+                            res.status(200).json({data: {user, profile}, token})
+                        })
                 } else {
                     console.log("user.password", username, "password", password)
                     res.status(401).json({ message: "Invalid credentials" });

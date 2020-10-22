@@ -59,6 +59,9 @@ function findBy(filter) {
         .orderBy("p.id");
 }
 
+function findByUserID(user_id){
+    return db("profile").where({user_id}).first();
+}
 function findById(id) {
     return db("profile").where({ id }).first();
 }

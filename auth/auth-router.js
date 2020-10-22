@@ -46,7 +46,7 @@ router.post("/login", (req, res) => {
     const { email, password } = req.body;
 
     if (isValid(req.body)) {
-        Users.findByEmail(email)
+        Users.findByUsername(username)
             .then(([user]) => {
                 // compare the password the hash stored in the database
                 console.log(user);

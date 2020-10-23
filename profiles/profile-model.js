@@ -39,7 +39,7 @@ async function change(profile, user_id) {
 
 async function remove(id) {
     try {
-        await db("profile").delete(id);
+        await db("profile").delete(id).first();
         return {success: "Profile removed successfully."}
     } catch (error) {
         throw error;

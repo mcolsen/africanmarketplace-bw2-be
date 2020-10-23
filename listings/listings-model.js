@@ -43,7 +43,7 @@ async function change(listing, listing_id) {
 
 async function remove(id) {
     try {
-        await db("listings").delete(id);
+        await db("listings").delete({id});
         return {success: "Listing removed successfully."}
     } catch (error) {
         throw error;
